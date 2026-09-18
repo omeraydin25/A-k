@@ -13,71 +13,119 @@
     box-sizing:border-box;
 }
 
+html,body{
+    width:100%;
+    min-height:100%;
+}
+
 body{
     min-height:100vh;
     overflow:hidden;
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     color:white;
-    background:#08030d;
+    background:#07020c;
 }
 
-/* ARKA PLAN */
+/* =========================
+   PREMIUM ARKA PLAN
+========================= */
+
 .background{
     position:fixed;
     inset:0;
     overflow:hidden;
+
     background:
-        radial-gradient(circle at 20% 20%,#4d123d 0%,transparent 30%),
-        radial-gradient(circle at 80% 15%,#24105b 0%,transparent 30%),
-        radial-gradient(circle at 50% 80%,#42102f 0%,transparent 35%),
-        linear-gradient(135deg,#07020c,#170719,#08030e);
+        radial-gradient(circle at 15% 15%,rgba(255,35,130,.35),transparent 28%),
+        radial-gradient(circle at 85% 10%,rgba(116,43,255,.32),transparent 30%),
+        radial-gradient(circle at 50% 55%,rgba(255,20,120,.13),transparent 35%),
+        radial-gradient(circle at 80% 90%,rgba(177,44,255,.2),transparent 30%),
+        linear-gradient(145deg,#050108,#140617 45%,#07020d);
 }
+
+.background::before{
+    content:"";
+    position:absolute;
+    inset:-50%;
+    background:
+        conic-gradient(
+            from 0deg,
+            transparent,
+            rgba(255,75,160,.07),
+            transparent,
+            rgba(155,80,255,.08),
+            transparent
+        );
+    animation:rotateBg 25s linear infinite;
+}
+
+@keyframes rotateBg{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* IŞIKLAR */
 
 .orb{
     position:absolute;
     border-radius:50%;
-    filter:blur(70px);
+    filter:blur(85px);
     opacity:.5;
     animation:orbMove 12s ease-in-out infinite alternate;
 }
 
 .orb1{
-    width:350px;
-    height:350px;
-    background:#ff167c;
-    top:-120px;
-    left:-120px;
+    width:420px;
+    height:420px;
+    background:#ff0875;
+    top:-180px;
+    left:-150px;
 }
 
 .orb2{
-    width:400px;
-    height:400px;
-    background:#7136ff;
-    right:-170px;
-    bottom:-150px;
+    width:450px;
+    height:450px;
+    background:#7137ff;
+    right:-200px;
+    bottom:-180px;
     animation-delay:2s;
 }
 
 .orb3{
-    width:280px;
-    height:280px;
-    background:#ff3ea5;
-    left:35%;
-    top:35%;
-    opacity:.18;
+    width:300px;
+    height:300px;
+    background:#ff4bb3;
+    left:40%;
+    top:40%;
+    opacity:.14;
     animation-delay:4s;
+}
+
+.orb4{
+    width:220px;
+    height:220px;
+    background:#b93dff;
+    left:-80px;
+    bottom:10%;
+    opacity:.18;
+    animation-delay:6s;
 }
 
 @keyframes orbMove{
     from{
         transform:translate(0,0) scale(1);
     }
+
     to{
-        transform:translate(70px,-50px) scale(1.2);
+        transform:translate(80px,-55px) scale(1.18);
     }
 }
 
-/* YILDIZLAR */
+/* =========================
+   YILDIZLAR
+========================= */
+
 .stars{
     position:absolute;
     inset:0;
@@ -85,12 +133,13 @@ body{
 
 .star{
     position:absolute;
-    width:3px;
-    height:3px;
     border-radius:50%;
     background:white;
-    box-shadow:0 0 12px white;
-    animation:twinkle 2s infinite alternate;
+    box-shadow:
+        0 0 8px white,
+        0 0 18px rgba(255,150,210,.8);
+
+    animation:twinkle 2s ease-in-out infinite alternate;
 }
 
 @keyframes twinkle{
@@ -98,93 +147,132 @@ body{
         opacity:.1;
         transform:scale(.5);
     }
+
     to{
         opacity:1;
-        transform:scale(1.7);
+        transform:scale(1.8);
     }
 }
 
-/* ARKA PLAN KALPLERİ */
+/* =========================
+   ARKA PLAN KALPLERİ
+========================= */
+
 .bgHeart{
     position:absolute;
-    color:#ff6fae;
-    opacity:.12;
-    font-size:25px;
+    color:#ff79b7;
+    opacity:.13;
     animation:floatHeart linear infinite;
-    filter:blur(.2px);
+    filter:drop-shadow(0 0 8px rgba(255,70,150,.5));
 }
 
 @keyframes floatHeart{
     0%{
-        transform:translateY(110vh) rotate(0deg);
+        transform:
+            translateY(110vh)
+            translateX(0)
+            rotate(0deg);
         opacity:0;
     }
+
     15%{
         opacity:.18;
     }
+
+    50%{
+        transform:
+            translateY(50vh)
+            translateX(40px)
+            rotate(180deg);
+    }
+
     100%{
-        transform:translateY(-20vh) rotate(360deg);
+        transform:
+            translateY(-20vh)
+            translateX(-40px)
+            rotate(360deg);
         opacity:0;
     }
 }
 
-/* IŞIK PARÇACIKLARI */
+/* PARÇACIK */
+
 .spark{
     position:absolute;
-    width:4px;
-    height:4px;
-    background:#ffd8ea;
+    width:3px;
+    height:3px;
     border-radius:50%;
-    box-shadow:0 0 15px #ff8fc2;
+    background:#ffd6e9;
+
+    box-shadow:
+        0 0 10px white,
+        0 0 20px #ff65a8;
+
     animation:sparkMove linear infinite;
 }
 
 @keyframes sparkMove{
-    from{
+    0%{
         transform:translateY(110vh);
         opacity:0;
     }
-    20%{opacity:1;}
+
+    20%{
+        opacity:1;
+    }
+
     100%{
         transform:translateY(-20vh);
         opacity:0;
     }
 }
 
-/* ANA */
+/* =========================
+   ANA ALAN
+========================= */
+
 main{
     position:relative;
     z-index:10;
+
     min-height:100vh;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     padding:20px;
 }
 
-/* KART */
+/* =========================
+   KART
+========================= */
+
 .card{
-    width:min(94vw,520px);
-    padding:45px 28px;
+    width:min(94vw,540px);
+
+    padding:45px 30px;
+
     text-align:center;
-    border-radius:36px;
+
+    border-radius:38px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.15),
+            rgba(255,255,255,.16),
             rgba(255,255,255,.045)
         );
 
     border:1px solid rgba(255,255,255,.2);
 
     box-shadow:
-        0 30px 100px rgba(0,0,0,.7),
-        inset 0 1px rgba(255,255,255,.2),
-        0 0 80px rgba(255,45,140,.08);
+        0 35px 120px rgba(0,0,0,.75),
+        0 0 80px rgba(255,30,140,.08),
+        inset 0 1px rgba(255,255,255,.25);
 
-    backdrop-filter:blur(30px);
-    -webkit-backdrop-filter:blur(30px);
+    backdrop-filter:blur(32px);
+    -webkit-backdrop-filter:blur(32px);
 
     animation:cardIn 1s cubic-bezier(.2,.8,.2,1);
 }
@@ -192,52 +280,82 @@ main{
 @keyframes cardIn{
     from{
         opacity:0;
-        transform:translateY(40px) scale(.92);
+        transform:
+            translateY(45px)
+            scale(.9);
     }
+
     to{
         opacity:1;
         transform:none;
     }
 }
 
-/* KALP */
+/* =========================
+   KALP
+========================= */
+
 .heart{
     font-size:78px;
+
     display:inline-block;
+
     filter:
-        drop-shadow(0 0 15px #ff3b8d)
-        drop-shadow(0 0 40px rgba(255,50,150,.5));
+        drop-shadow(0 0 15px #ff2685)
+        drop-shadow(0 0 45px rgba(255,40,140,.65));
 
     animation:heartbeat 1.3s infinite;
 }
 
 @keyframes heartbeat{
-    0%,100%{transform:scale(1);}
-    15%{transform:scale(1.18);}
-    30%{transform:scale(1);}
-    45%{transform:scale(1.1);}
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    15%{
+        transform:scale(1.2);
+    }
+
+    30%{
+        transform:scale(1);
+    }
+
+    45%{
+        transform:scale(1.1);
+    }
 }
 
-/* BAŞLIK */
+/* =========================
+   BAŞLIK
+========================= */
+
 .title{
     margin-top:18px;
-    font-size:clamp(35px,10vw,52px);
+
+    font-size:
+        clamp(37px,10vw,55px);
+
     font-weight:900;
 
     background:
         linear-gradient(
             90deg,
-            #ff6fae,
+            #ff66aa,
             #ffffff,
-            #e7a7ff,
-            #ff6fae
+            #e5a0ff,
+            #ff66aa
         );
 
     background-size:300%;
+
     -webkit-background-clip:text;
     color:transparent;
 
     animation:titleGradient 5s linear infinite;
+
+    text-shadow:
+        0 0 30px rgba(255,70,160,.12);
 }
 
 @keyframes titleGradient{
@@ -246,125 +364,203 @@ main{
     }
 }
 
-/* YAZILAR */
+/* =========================
+   YAZILAR
+========================= */
+
 .text{
-    margin-top:22px;
+    margin-top:23px;
+
     font-size:17px;
-    line-height:1.8;
-    color:#ffe8f2;
+
+    line-height:1.9;
+
+    color:#ffeaf4;
+}
+
+.text strong{
+    font-size:22px;
+    color:white;
 }
 
 .subText{
-    margin-top:14px;
+    margin-top:15px;
+
     font-size:14px;
+
+    line-height:1.8;
+
     color:rgba(255,255,255,.55);
-    line-height:1.7;
 }
 
-/* BUTONLAR */
+/* =========================
+   BUTONLAR
+========================= */
+
 .buttons{
-    margin-top:30px;
+    margin-top:31px;
+
     display:flex;
+
     justify-content:center;
+
+    align-items:center;
+
     gap:15px;
+
     min-height:58px;
 }
 
 button{
     border:none;
+
     border-radius:50px;
-    padding:15px 30px;
+
+    padding:15px 31px;
+
     font-size:17px;
+
     font-weight:800;
+
     cursor:pointer;
-    transition:.25s;
+
+    transition:
+        transform .25s,
+        box-shadow .25s;
 }
 
-#open{
-    color:white;
-    background:
-        linear-gradient(135deg,#ff277f,#ff69aa);
-
-    box-shadow:
-        0 10px 35px rgba(255,40,130,.4);
-}
-
-#open:hover{
-    transform:scale(1.08);
-}
-
+#open,
 #yes{
+
     color:white;
+
     background:
-        linear-gradient(135deg,#ff277f,#ff70ae);
+        linear-gradient(
+            135deg,
+            #ff237e,
+            #ff70b0
+        );
 
     box-shadow:
-        0 10px 35px rgba(255,40,130,.45);
+        0 10px 35px rgba(255,35,125,.45);
 }
 
+#open:hover,
 #yes:hover{
     transform:scale(1.08);
+
+    box-shadow:
+        0 15px 45px rgba(255,35,125,.6);
 }
 
 #no{
     color:white;
-    background:rgba(255,255,255,.09);
-    border:1px solid rgba(255,255,255,.18);
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid rgba(255,255,255,.18);
 }
 
-/* SAYAÇ */
+/* =========================
+   SAYAÇ
+========================= */
+
 .timer{
+
     margin-top:28px;
-    padding:12px 18px;
+
+    padding:14px 20px;
+
     display:inline-block;
-    border-radius:15px;
 
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.1);
+    border-radius:18px;
 
-    color:#ffb8d5;
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    color:#ffb8d8;
+
     font-size:13px;
+
     letter-spacing:2px;
 
     box-shadow:
-        inset 0 0 20px rgba(255,100,170,.04);
+        0 0 25px rgba(255,70,150,.06);
 }
 
 .timer span{
     color:white;
-    font-weight:800;
+
+    font-weight:900;
+
+    letter-spacing:2px;
 }
 
-/* TARİH */
+/* =========================
+   TARİH
+========================= */
+
 .date{
-    margin-top:18px;
+    margin-top:19px;
+
     font-size:11px;
+
     letter-spacing:4px;
-    color:rgba(255,255,255,.42);
+
+    color:
+        rgba(255,255,255,.42);
 }
 
-/* HİNT */
-.hint{
-    margin-top:20px;
-    color:rgba(255,255,255,.4);
-    font-size:12px;
-}
+/* =========================
+   FINAL
+========================= */
 
-/* BAŞLANGIÇ GİZLE */
 #proposal,
 #success{
     display:none;
 }
 
-/* SONUÇ */
 .successHeart{
-    font-size:75px;
-    animation:heartbeat 1.2s infinite;
+
+    font-size:90px;
+
+    display:inline-block;
+
+    filter:
+        drop-shadow(0 0 20px #ff2485)
+        drop-shadow(0 0 60px rgba(255,30,140,.6));
+
+    animation:
+        heartbeat 1.2s infinite,
+        finalGlow 2s infinite alternate;
+}
+
+@keyframes finalGlow{
+    from{
+        filter:
+            drop-shadow(0 0 15px #ff2485)
+            drop-shadow(0 0 35px rgba(255,30,140,.4));
+    }
+
+    to{
+        filter:
+            drop-shadow(0 0 30px #ff2485)
+            drop-shadow(0 0 80px rgba(255,30,140,.8));
+    }
 }
 
 .names{
+
     margin-top:15px;
-    font-size:clamp(35px,9vw,53px);
+
+    font-size:
+        clamp(36px,9vw,55px);
+
     font-weight:900;
 
     background:
@@ -372,55 +568,104 @@ button{
             90deg,
             #ff72ad,
             white,
-            #d5a0ff
+            #d69cff,
+            #ff72ad
         );
 
+    background-size:250%;
+
     -webkit-background-clip:text;
+
     color:transparent;
+
+    animation:
+        titleGradient 5s linear infinite;
 }
 
-.message{
-    margin-top:24px;
+.finalText{
+
+    margin-top:26px;
+
     font-size:16px;
-    line-height:1.9;
+
+    line-height:2;
+
     color:#ffeaf3;
 }
 
-.loveQuote{
-    margin-top:24px;
-    padding:17px;
+.finalText b{
+    color:#ffb7d6;
+}
 
-    border-radius:20px;
+.loveQuote{
+
+    margin-top:25px;
+
+    padding:18px 20px;
+
+    border-radius:22px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(255,80,150,.13),
-            rgba(150,80,255,.08)
+            rgba(255,75,150,.14),
+            rgba(150,70,255,.1)
         );
 
-    border:1px solid rgba(255,130,190,.2);
+    border:
+        1px solid rgba(255,130,190,.22);
 
-    color:#ffb7d7;
+    color:#ffc0dc;
+
     font-size:15px;
 
-    box-shadow:0 0 30px rgba(255,60,150,.08);
+    line-height:1.7;
+
+    box-shadow:
+        0 0 35px rgba(255,60,150,.08);
 }
 
-/* YAĞMUR */
+.finalTimer{
+
+    margin-top:20px;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    color:rgba(255,255,255,.42);
+}
+
+.finalTimer span{
+    color:#ffb4d4;
+    font-weight:800;
+}
+
+/* =========================
+   YAĞMUR
+========================= */
+
 .particle{
+
     position:fixed;
+
     top:-80px;
+
     z-index:50;
+
     pointer-events:none;
-    animation:fall linear forwards;
+
+    animation:
+        fall linear forwards;
 }
 
 @keyframes fall{
+
     0%{
         transform:
             translateY(-80px)
             rotate(0deg);
+
         opacity:0;
     }
 
@@ -432,11 +677,15 @@ button{
         transform:
             translateY(115vh)
             rotate(720deg);
+
         opacity:0;
     }
 }
 
-/* MOBİL */
+/* =========================
+   MOBİL
+========================= */
+
 @media(max-width:430px){
 
     .card{
@@ -447,8 +696,16 @@ button{
         font-size:65px;
     }
 
+    .successHeart{
+        font-size:70px;
+    }
+
     .text{
         font-size:16px;
+    }
+
+    .finalText{
+        font-size:15px;
     }
 
     button{
@@ -465,9 +722,12 @@ button{
     <div class="orb orb1"></div>
     <div class="orb orb2"></div>
     <div class="orb orb3"></div>
+    <div class="orb orb4"></div>
 
     <div class="stars" id="stars"></div>
+
     <div id="hearts"></div>
+
     <div id="sparks"></div>
 
 </div>
@@ -475,25 +735,44 @@ button{
 
 <main>
 
-<!-- İLK EKRAN -->
+<!-- =========================
+     İLK EKRAN
+========================= -->
+
 <section class="card" id="intro">
 
-    <div class="heart">💖</div>
+    <div class="heart">
+        💖
+    </div>
 
     <div class="title">
         Rabiya
     </div>
 
     <div class="text">
-        Sana söylemek istediğim bir şey var... 🌹
+
+        Sana söylemek istediğim
         <br>
-        Ama önce sana küçük bir sürprizim var. 🎁
+        çok özel bir şey var... 🌹
+
+        <br><br>
+
+        Ama hemen söylemeyeceğim. 🤭
+
+        <br>
+
+        Çünkü önce sana
+        <strong>küçük bir sürpriz</strong>
+        hazırladım.
+
     </div>
 
     <div class="subText">
-        Hazırsan aşağıdaki butona bas...
+
+        Hazırsan sürprizi aç.
         <br>
-        Sonrası tamamen sana özel. ✨
+        Bundan sonrası sadece sana özel. ✨
+
     </div>
 
     <div class="buttons">
@@ -511,7 +790,10 @@ button{
 </section>
 
 
-<!-- ÇIKIŞ TEKLİFİ -->
+<!-- =========================
+     TEKLİF
+========================= -->
+
 <section class="card" id="proposal">
 
     <div class="heart">
@@ -524,15 +806,26 @@ button{
 
     <div class="text">
 
-        Belki bunu beklemiyordun...
+        Bazen bazı şeyleri uzun uzun
+        anlatmaya gerek olmaz...
+
         <br><br>
 
-        Ama içimden geçen şeyi artık saklamak istemiyorum. 💌
+        Bir insanı tanıdıkça,
+        onunla konuşmak güzelleştikçe
+        ve yüzünde bir gülümseme görmek
+        insanın içini farklı hislerle dolduruyor. 💗
+
+        <br><br>
+
+        Ben de sana karşı
+        içimden geçenleri artık
+        saklamak istemedim.
 
         <br><br>
 
         <strong>
-            Benimle çıkar mısın?
+            Rabiya, benimle çıkar mısın?
         </strong>
 
     </div>
@@ -550,18 +843,22 @@ button{
     </div>
 
     <div class="timer">
-        Bu an için geçen süre:
-        <span id="timer">00:00:00</span>
+        <span id="timer">
+            00 gün 00:00:00
+        </span>
     </div>
 
     <div class="hint">
-        Cevabını bekliyorum... 🌹
+        Bazı anlar vardır, insan onları unutmak istemez. 🌹
     </div>
 
 </section>
 
 
-<!-- SONUÇ -->
+<!-- =========================
+     EVET SONRASI
+========================= -->
+
 <section class="card" id="success">
 
     <div class="successHeart">
@@ -576,21 +873,56 @@ button{
         18 EYLÜL 2026
     </div>
 
-    <div class="message">
+    <div class="finalText">
 
-        O zaman güzel bir hikâyenin
-        <br>
-        ilk sayfasını birlikte açtık. 🌹
+        İşte şimdi gerçekten
+        güzel bir hikâyenin
+        ilk sayfasını açtık. ✨
 
         <br><br>
 
-        Umarım bu küçük sürpriz,
-        yüzünde güzel bir tebessüm bırakmıştır. ✨
+        Belki bu sadece küçük bir
+        internet sayfası gibi görünüyor...
+
+        <br>
+
+        Ama benim için,
+        <b>sana söylemek istediğim
+        güzel bir cümlenin</b>
+        küçük bir hatırası. ❤️
+
+        <br><br>
+
+        Umarım bundan sonra
+        birlikte güleceğimiz,
+        konuşacağımız ve güzel
+        anılar biriktireceğimiz
+        çok fazla gün olur.
+
+        <br><br>
+
+        Ve bugün,
+        <b>18 Eylül 2026</b>,
+        bizim için güzel bir başlangıç
+        olarak kalır. 🌹
 
     </div>
 
     <div class="loveQuote">
-        “İyi ki Evet dedin, Rabiya. ❤️”
+
+        “Bazı güzel başlangıçlar
+        hiç beklemediğin bir anda gelir.
+        Benimki de bugün seninle başladı. ❤️”
+
+    </div>
+
+    <div class="finalTimer">
+
+        Bu güzel anın süresi:
+        <span id="finalTimer">
+            00 gün 00:00:00
+        </span>
+
     </div>
 
 </section>
@@ -600,12 +932,14 @@ button{
 
 <script>
 
-/* YILDIZLAR */
+/* =========================
+   YILDIZLAR
+========================= */
 
 const stars =
 document.getElementById("stars");
 
-for(let i=0;i<120;i++){
+for(let i=0;i<150;i++){
 
     const star =
     document.createElement("div");
@@ -618,28 +952,34 @@ for(let i=0;i<120;i++){
     star.style.top =
     Math.random()*100+"vh";
 
-    star.style.animationDelay =
-    Math.random()*4+"s";
-
     const size =
     1+Math.random()*3;
 
-    star.style.width=size+"px";
-    star.style.height=size+"px";
+    star.style.width =
+    size+"px";
+
+    star.style.height =
+    size+"px";
+
+    star.style.animationDelay =
+    Math.random()*4+"s";
 
     stars.appendChild(star);
 }
 
 
-/* ARKA PLAN KALPLERİ */
+/* =========================
+   ARKA PLAN KALPLERİ
+========================= */
 
 const hearts =
 document.getElementById("hearts");
 
-const heartSymbols =
-["♡","♥","❤","💗","💖"];
+const symbols=[
+    "♡","♥","❤","💗","💖","💕","💞"
+];
 
-for(let i=0;i<35;i++){
+for(let i=0;i<45;i++){
 
     const h =
     document.createElement("div");
@@ -647,9 +987,9 @@ for(let i=0;i<35;i++){
     h.className="bgHeart";
 
     h.textContent =
-    heartSymbols[
+    symbols[
         Math.floor(
-            Math.random()*heartSymbols.length
+            Math.random()*symbols.length
         )
     ];
 
@@ -657,24 +997,26 @@ for(let i=0;i<35;i++){
     Math.random()*100+"vw";
 
     h.style.fontSize =
-    (15+Math.random()*35)+"px";
+    (14+Math.random()*38)+"px";
 
     h.style.animationDuration =
     (8+Math.random()*15)+"s";
 
     h.style.animationDelay =
-    Math.random()*10+"s";
+    Math.random()*12+"s";
 
     hearts.appendChild(h);
 }
 
 
-/* PARÇACIKLAR */
+/* =========================
+   PARÇACIKLAR
+========================= */
 
 const sparks =
 document.getElementById("sparks");
 
-for(let i=0;i<80;i++){
+for(let i=0;i<100;i++){
 
     const s =
     document.createElement("div");
@@ -685,7 +1027,7 @@ for(let i=0;i<80;i++){
     Math.random()*100+"vw";
 
     s.style.animationDuration =
-    (5+Math.random()*10)+"s";
+    (5+Math.random()*12)+"s";
 
     s.style.animationDelay =
     Math.random()*10+"s";
@@ -700,7 +1042,9 @@ for(let i=0;i<80;i++){
 }
 
 
-/* EKRANLAR */
+/* =========================
+   EKRANLAR
+========================= */
 
 const intro =
 document.getElementById("intro");
@@ -720,69 +1064,97 @@ document.getElementById("yes");
 const no =
 document.getElementById("no");
 
+const timerElement =
+document.getElementById("timer");
 
-/* SÜPRİZİ AÇ */
-
-open.addEventListener("click",function(){
-
-    intro.style.display="none";
-
-    proposal.style.display="block";
-
-    proposal.style.animation=
-    "cardIn 1s cubic-bezier(.2,.8,.2,1)";
-
-});
+const finalTimer =
+document.getElementById("finalTimer");
 
 
-/* SAYAÇ */
+/* =========================
+   SAYAÇ
+========================= */
 
 let seconds=0;
-let timerRunning=false;
+
 let timerInterval=null;
+
+let timerStarted=false;
+
+let finalTime="00 gün 00:00:00";
+
+
+function formatTime(total){
+
+    const days =
+    Math.floor(total/86400);
+
+    const hours =
+    Math.floor(
+        (total%86400)/3600
+    );
+
+    const minutes =
+    Math.floor(
+        (total%3600)/60
+    );
+
+    const secs =
+    total%60;
+
+    return (
+        String(days).padStart(2,"0")
+        +" gün "
+        +String(hours).padStart(2,"0")
+        +":"
+        +String(minutes).padStart(2,"0")
+        +":"
+        +String(secs).padStart(2,"0")
+    );
+}
+
 
 function startTimer(){
 
-    if(timerRunning) return;
+    if(timerStarted) return;
 
-    timerRunning=true;
+    timerStarted=true;
 
     timerInterval =
     setInterval(function(){
 
         seconds++;
 
-        const h =
-        String(
-            Math.floor(seconds/3600)
-        ).padStart(2,"0");
-
-        const m =
-        String(
-            Math.floor((seconds%3600)/60)
-        ).padStart(2,"0");
-
-        const s =
-        String(
-            seconds%60
-        ).padStart(2,"0");
-
-        document.getElementById("timer")
-        .textContent =
-        `${h}:${m}:${s}`;
+        timerElement.textContent =
+        formatTime(seconds);
 
     },1000);
 }
 
 
-/* SÜRPRİZ AÇILINCA SAY */
+/* =========================
+   SÜRPRİZİ AÇ
+========================= */
 
-open.addEventListener("click",function(){
-    startTimer();
-});
+open.addEventListener(
+    "click",
+    function(){
+
+        intro.style.display="none";
+
+        proposal.style.display="block";
+
+        proposal.style.animation=
+        "cardIn 1s cubic-bezier(.2,.8,.2,1)";
+
+        startTimer();
+    }
+);
 
 
-/* HAYIR KAÇSIN */
+/* =========================
+   HAYIR KAÇIYOR
+========================= */
 
 function escapeNo(){
 
@@ -828,35 +1200,46 @@ no.addEventListener(
 );
 
 
-/* EVET */
+/* =========================
+   EVET
+========================= */
 
-yes.addEventListener("click",function(){
+yes.addEventListener(
+    "click",
+    function(){
 
-    /* SAYACI DURDUR */
+        /* SÜREYİ DONDUR */
 
-    clearInterval(timerInterval);
+        clearInterval(timerInterval);
 
-    timerRunning=false;
+        finalTime =
+        formatTime(seconds);
 
-    /* TEKLİFİ GİZLE */
+        /* FINAL SÜRE */
 
-    proposal.style.display="none";
+        finalTimer.textContent =
+        finalTime;
 
-    /* SONUCU GÖSTER */
+        /* EKRAN DEĞİŞTİR */
 
-    success.style.display="block";
+        proposal.style.display="none";
 
-    success.style.animation=
-    "cardIn 1s cubic-bezier(.2,.8,.2,1)";
+        success.style.display="block";
 
-    /* KALP / ÇİÇEK YAĞMURU */
+        success.style.animation=
+        "cardIn 1s cubic-bezier(.2,.8,.2,1)";
 
-    createLoveRain();
+        /* KUTLAMA */
 
-});
+        createLoveRain();
+
+    }
+);
 
 
-/* KUTLAMA */
+/* =========================
+   KALP / ÇİÇEK YAĞMURU
+========================= */
 
 function createLoveRain(){
 
@@ -871,11 +1254,12 @@ function createLoveRain(){
         "💖",
         "💕",
         "💗",
+        "💞",
         "✨",
         "💫"
     ];
 
-    for(let i=0;i<160;i++){
+    for(let i=0;i<200;i++){
 
         const p =
         document.createElement("div");
@@ -893,7 +1277,7 @@ function createLoveRain(){
         Math.random()*100+"vw";
 
         p.style.fontSize =
-        (16+Math.random()*30)+"px";
+        (16+Math.random()*32)+"px";
 
         p.style.animationDuration =
         (3+Math.random()*5)+"s";
@@ -905,7 +1289,7 @@ function createLoveRain(){
 
         setTimeout(
             ()=>p.remove(),
-            9000
+            10000
         );
     }
 }
